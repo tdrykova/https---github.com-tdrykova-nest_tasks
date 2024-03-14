@@ -91,7 +91,4 @@ export class TaskRepository extends Repository<Task> {
     return task;
   }
 }
-function axios(arg0: { method: string; url: string; }) {
-  throw new Error('Function not implemented.');
-}
 
