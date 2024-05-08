@@ -3,6 +3,12 @@ import * as config from 'config'
 
 const dbConfig = config.get('db')
 
+const AdminUser = require('nestjs-admin').AdminUserEntity
+
+module.exports = {
+  entities: [AdminUser],
+}
+
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: dbConfig.type,
   host: process.env.RDS_HOSTNAME || dbConfig.host,

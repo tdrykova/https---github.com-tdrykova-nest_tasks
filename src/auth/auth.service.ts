@@ -3,6 +3,8 @@ import { UserRepository } from './user.repository';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
+import { TokenLoginDto } from './dto/token-login.dto';
+import * as config from 'config'
 
 @Injectable()
 export class AuthService {
@@ -19,7 +21,7 @@ export class AuthService {
 
   async signIn(
     authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
+  ): Promise<TokenLoginDto> {
     const username =
       await this.userRepository.validateUserPassword(authCredentialsDto);
 
@@ -33,6 +35,8 @@ export class AuthService {
       `Generated JWT token with payload: ${JSON.stringify(payload)}`,
     );
 
-    return { accessToken };
+    const tokenDto = new TokenLoginDto(accessToken, 24 * 60 * 60 * 1000)
+
+    return tokenDto;
   }
 }

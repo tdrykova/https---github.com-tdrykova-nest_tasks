@@ -4,7 +4,7 @@ import {Logger} from '@nestjs/common'
 import * as config from 'config'
 
 async function bootstrap() {
-  const serverConfig = config.get('server')
+  // const serverConfig = config.get('server')
   const logger = new Logger('bootstrap')
   const app = await NestFactory.create(AppModule);
 
@@ -12,7 +12,7 @@ async function bootstrap() {
   //   app.enableCors();
   // }
 
-  const port = process.env.PORT || serverConfig.port;
+  const port = 3000; //process.env.PORT || serverConfig.port;
   await app.listen(port);
   logger.log(`Application is listenning on port ${port}`)
 }
